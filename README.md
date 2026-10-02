@@ -23,8 +23,8 @@ I was tired of using the awful OSD controls on my Samsung S27D850T monitor to ad
 
 **Note:** 
 Your monitor must support DDC/CI for `ddcutil` to communicate with it.
-The application uses VCP code `0x10` (Brightness) to control the monitor.
-You can also verify that `ddcutil` can communicate with your monitor directly:
+The application uses VCP code `0x10` (brightness) to control the monitor.
+You can verify that `ddcutil` can communicate with your monitor directly:
 
 ```bash
 ddcutil getvcp 10
@@ -73,4 +73,5 @@ Launch the application and adjust the brightness slider to the desired level.
 
 Click **Apply** to send the new brightness value to the monitor.
 
-`ddcutilgui` is designed for mouse-based interaction and avoids combining mouse and keyboard controls, hence the lack of an input box.
+`ddcutilgui` is designed for mouse-based interaction.
+The UX avoids combining mouse and keyboard controls, hence the lack of an input box.
