@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+
+import gi
+import re
+import subprocess
+
+gi.require_version("Gtk", "4.0")
+from gi.repository import GLib, Gtk
+
+
+class BrightnessApp(Gtk.Application):
+    def __init__(self):
+        super().__init__(application_id="com.sm.Brightness")
+        GLib.set_application_name("Monitor Brightness")
+        GLib.set_prgname("monitor-brightness")
+
+    def do_activate(self):
+        window = Gtk.ApplicationWindow(application=self, title="Monitor Brightness")
+        window.set_default_size(400, 100)
+
+        box = Gtk.Box(
+            orientation=Gtk.Orientation.HORIZONTAL,
+            spacing=10
+        )
+        
+        temp = subprocess.run(
+                            ["ddcutil", "getvcp", "10"],
+                            capture_output=True,
+                            text=True
+               ).stdout
+
+        def apply_brightness(button):
+            value = int(slider.get_value())
+            subprocess.run(["ddcutil", "setvcp", "10", str(value)])
+
+
+        def slider_changed(scale):
+            value = int(scale.get_value())
+            value_label.set_text(str(value))
+
+        match = re.search(r"current value\s*=\s*(\d+)", temp)
+        init_val = int(match.group(1))
+        
+        value_label = Gtk.Label(label=str(init_val))
+        apply_button = Gtk.Button(label="Apply")
+        apply_button.connect("clicked", apply_brightness)
+
+        slider = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 100, 1)
+        slider.set_value(init_val)
+        slider.connect("value-changed", slider_changed)
+        
+        box.append(slider)
+        box.append(value_label)
+        box.append(apply_button)
+        
+        box.set_margin_start(20)
+        box.set_margin_end(20)
+        box.set_margin_top(20)
+        box.set_margin_bottom(20)
+        slider.set_hexpand(True)
+
+        window.set_child(box)
+        window.present()
+
+
+app = BrightnessApp()
+app.run()

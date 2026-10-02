@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Monitor Brightness
+Exec=ddcutilgui
+Icon=display-brightness
+Type=Application
+Terminal=false
+Categories=Utility;
+StartupWMClass=monitor-brightness
+
