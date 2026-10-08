@@ -75,3 +75,8 @@ Click **Apply** to send the new brightness value to the monitor.
 
 `ddcutilgui` is designed for mouse-based interaction.
 The UX avoids combining mouse and keyboard controls, hence the lack of an input box.
+
+## Troubleshooting
+
+- If you have linuxbrew installed and your shell doesn't use system Python, change the first line of `ddcutilgui` to `#!/usr/bin/python3`
+- You might have to add user to the i2c group: `sudo usermod -aG i2c $USER`
