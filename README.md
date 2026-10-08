@@ -78,5 +78,5 @@ The UX avoids combining mouse and keyboard controls, hence the lack of an input 
 
 ## Troubleshooting
 
-- If you have linuxbrew installed and your shell doesn't use system Python, change the first line of `ddcutilgui` to `#!/usr/bin/python3`
+- If linuxbrew installed, change the first line of `ddcutilgui` to `#!/usr/bin/python3`
 - You might have to add user to the i2c group: `sudo usermod -aG i2c $USER`
