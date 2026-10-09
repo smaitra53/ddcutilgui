@@ -10,7 +10,7 @@ from gi.repository import GLib, Gtk
 
 class BrightnessApp(Gtk.Application):
     def __init__(self):
-        super().__init__(application_id="com.sm.Brightness")
+        super().__init__(application_id="io.github.smaitra53.ddcutilgui")
         GLib.set_application_name("Monitor Brightness")
         GLib.set_prgname("monitor-brightness")
 
